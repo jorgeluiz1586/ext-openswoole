@@ -20,6 +20,7 @@
 #include "ext/pcre/php_pcre.h"
 #endif
 #include "zend_exceptions.h"
+#include "zend_extensions.h"
 
 #include "swoole_server.h"
 #include "swoole_util.h"

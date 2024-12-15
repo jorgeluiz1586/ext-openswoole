@@ -17,6 +17,7 @@
  */
 
 #include "php_swoole_cxx.h"
+
 #include "swoole_server.h"
 #include "swoole_signal.h"
 
@@ -376,6 +377,52 @@ php_socket *php_swoole_convert_to_socket(int sock) {
     return socket_object;
 }
 #endif
+
+/* #ifdef SWOOLE_SOCKETS_SUPPORT
+php_socket *php_swoole_convert_to_socket(int sock) {
+    php_socket *socket_object;
+#if PHP_VERSION_ID < 80200
+    socket_object = (php_socket *) emalloc(sizeof *socket_object);
+    sw_memset_zero(socket_object, sizeof(*socket_object));
+    socket_object->bsd_socket = sock;
+    socket_object->blocking = 1;
+
+    struct sockaddr_storage addr;
+    socklen_t addr_len = sizeof(addr);
+
+    if (getsockname(sock, (struct sockaddr *) &addr, &addr_len) == 0) {
+        socket_object->type = addr.ss_family;
+    } else {
+        php_swoole_sys_error(E_WARNING, "unable to obtain socket family");
+    _error:
+        efree(socket_object);
+        return nullptr;
+    }
+
+    int t = fcntl(sock, F_GETFL);
+    if (t == -1) {
+        php_swoole_sys_error(E_WARNING, "unable to obtain blocking state");
+        goto _error;
+    } else {
+        socket_object->blocking = !(t & O_NONBLOCK);
+    }
+#else
+    zval zsocket;
+    object_init_ex(&zsocket, socket_ce);
+    socket_object = Z_SOCKET_P(&zsocket);
+    php_stream *stream = php_stream_sock_open_from_socket(sock, nullptr);
+    if (stream) {
+        socket_import_stream(stream, socket_object);
+    } else {
+        php_swoole_fatal_error(E_ERROR, "unable to import socket");
+    _error:
+        efree(socket_object);
+        return nullptr;
+    }
+#endif
+    return socket_object;
+}
+#endif */
 
 static void event_check_reactor() {
     php_swoole_check_reactor();

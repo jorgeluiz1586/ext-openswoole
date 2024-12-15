@@ -1,11 +1,11 @@
 define timer_list
-    if SwooleTG.timer
-        printf "current timer number: %d, round: %d\n", SwooleTG.timer.num,SwooleTG.timer->round
+    if SwooleWG.timer
+        printf "current timer number: %d, round: %d\n", SwooleWG.timer.num,SwooleWG.timer->round
         set $running = 1
         set $i = 1
         while $running
-            if $i < SwooleTG.timer->heap->num
-                set $tmp = SwooleTG.timer->heap->nodes[$i]
+            if $i < SwooleWG.timer->heap->num
+                set $tmp = SwooleWG.timer->heap->nodes[$i]
                 set $node = (swTimer_node *)$tmp->data
                 if $node
                    printf "\t timer[%d] exec_msec:%ld round:%ld\n", $node->id, $node->exec_msec, $node->round
@@ -21,14 +21,14 @@ define timer_list
 end
 
 define reactor_info
-    if SwooleTG.reactor
-        printf "\t reactor id: %d\n",SwooleTG.reactor->id
-        printf "\t running: %d\n", SwooleTG.reactor->running
-        printf "\t event_num: %d\n", SwooleTG.reactor->event_num
-        printf "\t aio_task_num: %d\n", SwooleTG.aio_task_num
-        printf "\t max_event_num: %d\n", SwooleTG.reactor->max_event_num
-        printf "\t check_timer: %d\n", SwooleTG.reactor->check_timer
-        printf "\t timeout_msec: %d\n", SwooleTG.reactor->timeout_msec
+    if SwooleWG.reactor
+        printf "\t reactor id: %d\n",SwooleWG.reactor->id
+        printf "\t running: %d\n", SwooleWG.reactor->running
+        printf "\t event_num: %d\n", SwooleWG.reactor->event_num
+        printf "\t aio_task_num: %d\n", SwooleWG.aio_task_num
+        printf "\t max_event_num: %d\n", SwooleWG.reactor->max_event_num
+        printf "\t check_timer: %d\n", SwooleWG.reactor->check_timer
+        printf "\t timeout_msec: %d\n", SwooleWG.reactor->timeout_msec
     end
 end
 
@@ -44,7 +44,7 @@ define sw_hash_map_list
                set $it = $hmap->root
             end
             while $running
-                
+
                 set $tmp = (swHashMap_node *)$it->hh.next
                 if $tmp
                     printf "key_int[%d] key_str:%s data:%p\n", $tmp->key_int, $tmp->key_str, $tmp->data
@@ -52,7 +52,7 @@ define sw_hash_map_list
                 else
                     set $running = 0
                 end
-            end 
+            end
         end
     end
 end

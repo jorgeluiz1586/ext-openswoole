@@ -1,7 +1,7 @@
 PROJECT(libopenswoole)
 
 ENABLE_LANGUAGE(ASM)
-set(SWOOLE_VERSION 22.1.2)
+set(SWOOLE_VERSION 25.0.0)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -g")
@@ -25,6 +25,8 @@ SET(CMAKE_BUILD_TYPE Debug)
 
 # Code Coverage Configuration
 add_library(coverage_config INTERFACE)
+
+include_directories(/usr/include/postgresql/)
 
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
 if(CODE_COVERAGE)

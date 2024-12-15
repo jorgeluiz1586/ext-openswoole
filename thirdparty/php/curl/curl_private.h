@@ -137,7 +137,7 @@ typedef struct {
 #elif PHP_VERSION_ID < 80000
     const char *private_data;
 #endif
-    
+
 	/* CurlShareHandle object set using CURLOPT_SHARE. */
 #if PHP_VERSION_ID >= 80000
 	struct _php_curlsh            *share;

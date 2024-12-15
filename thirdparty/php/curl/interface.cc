@@ -343,7 +343,7 @@ void swoole_native_curl_minit(int module_number) {
     swoole_coroutine_curl_handle_ce->create_object = swoole_curl_create_object;
     // TODO: fix this duplicate, init handlers
     //memcpy(&swoole_coroutine_curl_handle_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
-    
+
     memcpy(&swoole_coroutine_curl_handle_handlers, &std_object_handlers, sizeof(zend_object_handlers));
 
     swoole_coroutine_curl_handle_handlers.offset = XtOffsetOf(php_curl, std);
@@ -1981,7 +1981,7 @@ static int _php_curl_setopt(php_curl *ch, zend_long option, zval *zvalue) /* {{{
         zend_string *str = zval_get_string(zvalue);
         int ret = php_curl_option_str(ch, option, ZSTR_VAL(str), ZSTR_LEN(str), 1);
         zend_string_release(str);
-        return ret;  
+        return ret;
 #endif
     }
 

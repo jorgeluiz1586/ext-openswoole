@@ -63,6 +63,7 @@
     _(SW_ZEND_STR_FINISH,                   "finish") \
     _(SW_ZEND_STR_CURL_IS_CO,               "is_co") \
     _(SW_ZEND_STR_CURL_OPTION,              "option") \
+    _(SW_ZEND_STR_SOCKET,                   "socket") \
 
 typedef enum sw_zend_known_string_id {
 #define _SW_ZEND_STR_ID(id, str) id,

@@ -170,6 +170,10 @@ extern zend_class_entry *swoole_exception_ce;
 extern zend_object_handlers swoole_exception_handlers;
 extern zend_class_entry *swoole_error_ce;
 extern zend_class_entry *openswoole_constants_ce;
+#if PHP_VERSION_ID >= 80400
+extern zend_class_entry *swoole_exit_exception_ce;
+extern zend_object_handlers swoole_exit_exception_handlers;
+#endif
 
 //---------------------------------------------------------
 //                  Coroutine API
